@@ -1,0 +1,26 @@
+Transform: 'AWS::Serverless-2016-10-31'
+
+Resources:
+
+  TodoList:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs12.x
+      Handler: public/todo-list.handler
+      Timeout: 10
+      MemorySize: 256
+      Events:
+        TodoAdd:
+          Type: Api
+          Properties:
+            Path: /todo
+            Method: post
+        TodoDelete:
+          Type: Api
+          Properties:
+            Path: /todo
+            Method: post
+
+      Environment:
+        Variables:
+          DB_PATH: ':mongo:'
